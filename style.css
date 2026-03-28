@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&display=swap');
 /* --- 基本設定 --- */
 :root {
     --primary-color: #ff9a9e; /* 優しいピンク */
@@ -10,7 +11,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    font-family: 'Kaisei Opti', serif, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
