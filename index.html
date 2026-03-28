@@ -8,7 +8,7 @@
 <body>
     <div id="app">
         <h1 id="title">ハッピーメモリー</h1>
-        <section id="first-settings" class="view">
+        <section id="view-first-settings" class="view">
             <h2>初期設定</h2>
             <p>ログイン</p>
             <button onclick="login()">ログイン</button>
@@ -23,10 +23,12 @@
         <section id="view-list" class="view" style="display:none;">
             <h2>ハッピーリスト</h2>
             <div id="list-container">
-                </div>
+                <ul id="memory-list"></ul>
+            </div>
         </section>
         <section id="view-settings" class="view" style="display:none;">
             <h2>設定</h2>
+            <button id="logout" onclick="logout()">ログアウト</button>
         </section>
 
         <nav id="bottom-nav" style="display:none;">
