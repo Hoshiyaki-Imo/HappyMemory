@@ -1,0 +1,157 @@
+/* --- 基本設定 --- */
+:root {
+    --primary-color: #ff9a9e; /* 優しいピンク */
+    --accent-color: #fad0c4;
+    --bg-color: #fffafb;
+    --text-color: #444;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+#app {
+    max-width: 600px; /* PCで見ても広がりすぎない */
+    margin: 0 auto;
+    padding: 20px 20px 100px 20px; /* 下にナビの余白を作る */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* --- タイトル --- */
+#title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* --- 各ビューの共通デザイン --- */
+.view {
+    animation: fadeIn 0.4s ease; /* 切り替え時にふわっと出す */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+/* --- 入力エリア (記録) --- */
+#memory-input {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    resize: none;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#memory-input:focus {
+    border-color: var(--primary-color);
+}
+
+/* --- ボタンデザイン --- */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    width: 100%; /* スマホで押しやすく */
+    margin-bottom: 10px;
+}
+
+button:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+button.happy-list {
+    width: 48%; /* 横並び用 */
+    display: inline-block;
+}
+
+/* --- リスト表示 --- */
+#memory-list {
+    list-style: none;
+    padding: 0;
+}
+
+.memory-item {
+    background: white;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--primary-color);
+}
+
+.memory-date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.memory-text {
+    white-space: pre-wrap; /* 改行を反映 */
+    word-wrap: break-word;
+}
+
+/* --- 下部固定ナビゲーション --- */
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px); /* すりガラス効果 */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+}
+
+#bottom-nav button {
+    background: none;
+    color: var(--text-color);
+    width: auto;
+    padding: 5px;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+#bottom-nav button::before {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+/* アイコン代わりの絵文字 (必要に応じて変更してください) */
+#bottom-nav button:nth-child(1)::before { content: "✍️"; }
+#bottom-nav button:nth-child(2)::before { content: "✨"; }
+#bottom-nav button:nth-child(3)::before { content: "⚙️"; }

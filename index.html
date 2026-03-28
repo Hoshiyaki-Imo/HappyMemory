@@ -18,10 +18,13 @@
             <h2>記録</h2>
             <textarea id="memory-input" placeholder="ハッピーな内容"></textarea>
             <button onclick="commitMemory()">コミット</button>
+            <p id="sended"></p>
         </section>
 
         <section id="view-list" class="view" style="display:none;">
             <h2>ハッピーリスト</h2>
+            <button class="happy-list" id="list" onclick="renderListList()">リスト</button>
+            <button class="happy-list" id="random" onclick="renderListRandom()">ランダム</button>
             <div id="list-container">
                 <ul id="memory-list"></ul>
             </div>
