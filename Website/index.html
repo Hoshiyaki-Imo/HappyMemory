@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ハッピーメモリー</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1 id="title">ハッピーメモリー</h1>
+        <section id="first-settings" class="view">
+            <h2>初期設定</h2>
+            <p>ログイン</p>
+            <button onclick="login()">ログイン</button>
+        </section>
+
+        <section id="view-record" class="view" style="display:none;">
+            <h2>記録</h2>
+            <textarea id="memory-input" placeholder="ハッピーな内容"></textarea>
+            <button onclick="commitMemory()">コミット</button>
+        </section>
+
+        <section id="view-list" class="view" style="display:none;">
+            <h2>ハッピーリスト</h2>
+            <div id="list-container">
+                </div>
+        </section>
+        <section id="view-settings" class="view" style="display:none;">
+            <h2>設定</h2>
+        </section>
+
+        <nav id="bottom-nav" style="display:none;">
+            <button onclick="showView('record')">記録</button>
+            <button onclick="showView('list')">閲覧</button>
+            <button onclick="showView('settings')">設定</button>
+        </nav>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
