@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* --- 変数と基本設定 --- */
+:root {
+    --bg-color: #f9f8f6;         /* 柔らかな紙のような白 */
+    --main-text: #2c3e50;        /* 墨色に近い深い紺灰 */
+    --accent-color: #7d6b5d;     /* 落ち着いた琥珀色を帯びたグレー */
+    --border-color: #d1ccc0;     /* 繊細な線 */
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --font-kaisei: 'Kaisei Opti', serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-kaisei);
+    background-color: var(--bg-color);
+    color: var(--main-text);
+    line-height: 1.8;
+    /* デフォルト（スマホ）のサイズをかなり大きく設定 */
+    font-size: 100px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- メディアクエリによるレスポンシブ対応 --- */
+@media (min-width: 768px) {
+    /* PCではスマホよりは相対的に落ち着いた、かつ読みやすい大きさに */
+    body {
+        font-size: 30px;
+    }
+}
+
+#app {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 24px 140px 24px; /* 下部ナビ用の余白 */
+    box-sizing: border-box;
+}
+
+/* --- タイトル --- */
+#title {
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-size: 4rem;
+    margin-bottom: 0.1rem;
+    color: var(--main-text);
+}
+
+/* --- ビュー共通設定 --- */
+.view {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+/* --- 入力フォーム --- */
+#memory-input {
+    width: 100%;
+    height: 250px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    font-family: var(--font-kaisei);
+    font-size: 2rem;
+    color: var(--main-text);
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    outline: none;
+    transition: border-color 0.4s;
+    border-radius: 0; /* 直線美を優先 */
+}
+
+#memory-input:focus {
+    border-color: var(--accent-color);
+}
+
+/* --- ボタン --- */
+button {
+    font-family: var(--font-kaisei);
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 18px 36px;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #5d4f45;
+}
+
+/* ボタンの横並び設定用クラス */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+button.happy-list {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+button.happy-list:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+/* 普通のボタンのデザイン */
+button .commit-button {
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+}
+
+/* 「disabled属性がついている時」だけ自動で適用されるデザイン */
+button .commit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* --- リスト表示 --- */
+#memory-list {
+    list-style: none;
+    padding: 0;
+}
+
+.memory-item {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.memory-date {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+    display: block;
+    letter-spacing: 0.1em;
+}
+
+.memory-text {
+    font-weight: 400;
+}
+
+/* --- 下部固定ナビゲーション --- */
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--nav-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* 背景をわずかにぼかす */
+}
+
+#bottom-nav button {
+    display: flex;
+    flex-direction: column; /* アイコンを上、文字を下に並べる */
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; /* 文字を少し小さく */
+}
+
+.material-symbols-outlined {
+    font-size: 24px; /* アイコンのサイズ */
+    margin-bottom: 4px; /* アイコンと文字の間の隙間 */
+}
+
+#bottom-nav button:hover {
+    background-color: #f0ede9;
+}
+
+/* ナビボタン間の境界線 */
+#bottom-nav button:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
