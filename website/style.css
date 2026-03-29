@@ -163,15 +163,16 @@ button.happy-list:hover {
 }
 
 #bottom-nav button {
-    background: none;
-    color: var(--main-text);
-    width: 33.33%;
-    height: 100%;
-    font-size: 1.1rem;
-    font-weight: 400;
-    padding: 0;
-    letter-spacing: 0.1em;
-    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column; /* アイコンを上、文字を下に並べる */
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; /* 文字を少し小さく */
+}
+
+.material-symbols-outlined {
+    font-size: 24px; /* アイコンのサイズ */
+    margin-bottom: 4px; /* アイコンと文字の間の隙間 */
 }
 
 #bottom-nav button:hover {
