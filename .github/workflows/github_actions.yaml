@@ -1,6 +1,8 @@
 name: Make My Website
 
-on: push: branches: ["main"]
+on:
+  push:
+    branches: ["main"]
 
 permissions:
   contents: read
