@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 import { auth, provider, db } from '@/lib/firebase';
 import { signInWithPopup, onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { collection, addDoc, serverTimestamp, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, query, where, orderBy, limit, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 
 export default function HappyMemoryApp() {
   // 画面の切り替えを管理する「状態（State）」
   const [currentView, setCurrentView] = useState('first-settings');
   const [user, setUser] = useState<User | null>(null);
   const [inputText, setInputText] = useState('');
-  const [message, setMessage] = useState('');
   const [memories, setMemories] = useState<any[]>([]);
 
   // ログイン状態の監視（起動時に1回だけ実行）
@@ -27,11 +27,24 @@ export default function HappyMemoryApp() {
   }, []);
 
   // --- 機能（関数）---
+  const toast = Swal.mixin({
+    confirmButtonColor: '#7d6b5d', // アプリのアクセントカラーに合わせる
+    cancelButtonColor: '#d33',
+    background: '#f9f8f6', // アプリの背景色に合わせる
+    color: '#2c3e50'       // 文字色
+  })
+
   const login = () => signInWithPopup(auth, provider);
   
   const logout = async () => {
     await signOut(auth);
-    console.log("ログアウト成功");
+    toast.fire({
+      title: 'ログアウト',
+      text: 'ログアウトしました',
+      icon: 'success',
+      timer: 1500,
+      showConfirmButton: false
+    })
   };
 
   const commitMemory = async () => {
@@ -43,10 +56,22 @@ export default function HappyMemoryApp() {
         createdAt: serverTimestamp(),
         randomCode: Math.random()
       });
-      setMessage("送信完了");
       setInputText('');
+      toast.fire({
+        title: 'コミット完了',
+        text: '送信されました',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      })
     } catch (e) {
-      setMessage("保存失敗: " + e);
+      toast.fire({
+        title: 'エラー',
+        text: 'エラーが起きました\n${e}',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      })
     }
   };
 
@@ -109,6 +134,41 @@ export default function HappyMemoryApp() {
     }
   };
 
+  const deleteCommit = async (id: string) => {
+    // 1. 確認ダイアログを表示
+    const result = await toast.fire({
+      title: '削除しますか？',
+      text: "このコミットを削除します（復元不可）",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '削除する',
+      cancelButtonText: 'やめておく',
+    });
+
+    // 2. 「削除する」が押された場合のみ実行
+    if (result.isConfirmed) {
+      try {
+        const docRef = doc(db, "memories", id);
+        await deleteDoc(docRef);
+
+        // Stateを更新して画面から消す
+        setMemories(prev => prev.filter(mem => mem.id !== id));
+
+        // 完了通知（これもSweetAlert2でおしゃれに）
+        toast.fire({
+          title: '削除完了',
+          text: '完全に削除されました',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+      } catch (e) {
+        Swal.fire('エラー', '削除に失敗しました', 'error');
+      }
+    }
+  };
+
   // --- 見た目（HTML）の部分 ---
   return (
     <div id="app">
@@ -133,7 +193,6 @@ export default function HappyMemoryApp() {
             onChange={(e) => setInputText(e.target.value)}
           />
           <button onClick={commitMemory} disabled={inputText.trim().length === 0} className='commit-button'>コミット</button>
-          <p id="sended">{message}</p>
         </section>
       )}
 
@@ -150,6 +209,7 @@ export default function HappyMemoryApp() {
                 <li key={mem.id || index} className="memory-item">
                   {mem.date && <div className="memory-date">{mem.date}</div>}
                   <div className="memory-text">{mem.text}</div>
+                  <div style={{ textAlign: 'right' }}><button className='delete-btn' onClick={() => deleteCommit(mem.id)}><span className="material-symbols-outlined">delete_forever</span></button></div>
                 </li>
               ))}
             </ul>

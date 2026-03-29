@@ -18,7 +18,7 @@ body {
     color: var(--main-text);
     line-height: 1.8;
     /* デフォルト（スマホ）のサイズをかなり大きく設定 */
-    font-size: 100px;
+    font-size: 14px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -26,7 +26,7 @@ body {
 @media (min-width: 768px) {
     /* PCではスマホよりは相対的に落ち着いた、かつ読みやすい大きさに */
     body {
-        font-size: 30px;
+        font-size: 24px;
     }
 }
 
@@ -42,7 +42,7 @@ body {
     text-align: center;
     font-weight: 700;
     letter-spacing: 0.15em;
-    font-size: 4rem;
+    font-size: 2.3rem;
     margin-bottom: 0.1rem;
     color: var(--main-text);
 }
@@ -58,7 +58,7 @@ body {
 }
 
 h2 {
-    font-size: 3rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 40px;
     letter-spacing: 0.1em;
@@ -98,7 +98,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
 }
 
@@ -126,14 +126,14 @@ button.happy-list:hover {
 }
 
 /* 普通のボタンのデザイン */
-button .commit-button {
+button.commit-button {
     background-color: var(--accent-color);
     color: white;
     cursor: pointer;
 }
 
 /* 「disabled属性がついている時」だけ自動で適用されるデザイン */
-button .commit-button:disabled {
+button.commit-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
     opacity: 0.5;
@@ -151,7 +151,7 @@ button .commit-button:disabled {
 }
 
 .memory-date {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--accent-color);
     margin-bottom: 12px;
     display: block;
@@ -183,7 +183,7 @@ button .commit-button:disabled {
     flex-direction: column; /* アイコンを上、文字を下に並べる */
     align-items: center;
     justify-content: center;
-    font-size: 12px; /* 文字を少し小さく */
+    font-size: 1.2rem; /* 文字を少し小さく */
 }
 
 .material-symbols-outlined {
@@ -198,4 +198,20 @@ button .commit-button:disabled {
 /* ナビボタン間の境界線 */
 #bottom-nav button:not(:last-child) {
     border-right: 1px solid var(--border-color);
+}
+
+button.delete-btn {
+    all: unset; /* 一旦リセット */
+    cursor: pointer;
+    font-size: 1rem;
+    color: #a0a0a0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+    width: auto;
+    padding: 2px 5px;
+}
+
+button.delete-btn:hover {
+    color: #e74c3c;
+    border-bottom: 1px solid #e74c3c;
 }
