@@ -74,7 +74,7 @@ h2 {
     border: 1px solid var(--border-color);
     background-color: #fff;
     font-family: var(--font-kaisei);
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: var(--main-text);
     box-sizing: border-box;
     margin-bottom: 30px;
@@ -183,11 +183,11 @@ button.commit-button:disabled {
     flex-direction: column; /* アイコンを上、文字を下に並べる */
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem; /* 文字を少し小さく */
+    font-size: 0.7rem; /* 文字を少し小さく */
 }
 
 .material-symbols-outlined {
-    font-size: 24px; /* アイコンのサイズ */
+    font-size: 1rem; /* アイコンのサイズ */
     margin-bottom: 4px; /* アイコンと文字の間の隙間 */
 }
 
